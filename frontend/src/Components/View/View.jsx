@@ -1,21 +1,21 @@
 import React from 'react';
 
 import './View.css';
-function View() {
+function View({item}) {
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">
         <img
-          src="../../../Images/R15V3.jpg"
+          src={item.image}
           alt=""
         />
       </div>
       <div className="rightSection">
         <div className="productDetails">
-          <p>&#x20B9; 250000 </p>
-          <span>YAMAHA R15V3</span>
-          <p>Two Wheeler</p>
-          <span>Tue May 04 2021</span>
+          <p>&#x20B9; {item.price} </p>
+          <span>{item.name}</span>
+          <p>{item.category}</p>
+          <span>{new Date(item.createdAt).toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' })}</span>
         </div>
         <div className="contactDetails">
           <p>Seller details</p>

@@ -1,14 +1,46 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Signup.css';
+import axios from '../../axios'
+import {useNavigate ,Link} from 'react-router-dom'
 
 export default function Signup() {
+  const navigate = useNavigate()
+  const [formData,setFormData]= useState({
+    name:'',
+    email:'',
+    password:'',
+    phone:''
+  })
+
+const handleChange=(e)=>{
+  const {name,value} =e.target;
+  setFormData((prevFormData)=>({
+    ...prevFormData,
+    [name]:value
+  }))
+}
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+
+    axios.post('/signup',formData).then((response)=>{
+      if(response.data.success){
+        navigate('/login')
+      }
+    }).catch((err)=>{
+      console.log(err);
+    })
+  
+  }
+
+
   return (
     <div>
       <div className="signupParentDiv">
         <img width="200px" height="200px" src={Logo}></img>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="fname">Username</label>
           <br />
           <input
@@ -16,7 +48,8 @@ export default function Signup() {
             type="text"
             id="fname"
             name="name"
-            defaultValue="John"
+            value={formData.name}
+            onChange={handleChange}
           />
           <br />
           <label htmlFor="fname">Email</label>
@@ -26,7 +59,8 @@ export default function Signup() {
             type="email"
             id="fname"
             name="email"
-            defaultValue="John"
+            value={formData.email}
+            onChange={handleChange}
           />
           <br />
           <label htmlFor="lname">Phone</label>
@@ -36,7 +70,8 @@ export default function Signup() {
             type="number"
             id="lname"
             name="phone"
-            defaultValue="Doe"
+            value={formData.phone}
+            onChange={handleChange}
           />
           <br />
           <label htmlFor="lname">Password</label>
@@ -46,13 +81,14 @@ export default function Signup() {
             type="password"
             id="lname"
             name="password"
-            defaultValue="Doe"
+            value={formData.password}
+            onChange={handleChange}
           />
           <br />
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <Link to='/login'>Login</Link>
       </div>
     </div>
   );

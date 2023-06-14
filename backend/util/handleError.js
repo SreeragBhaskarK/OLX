@@ -1,8 +1,8 @@
 export const handleError = (error) => {
     let errors = { email: '', password: '' }
-
+    console.log(error.message,'///',error);
     // monogoose validation
-    if (error.message.includes('users validation failed')) {
+    if (error.message.includes('users validation failed') ||error.message.includes('items validation failed')  ) {
         Object.values(error.errors).forEach((properties) => {
             errors[properties.path] = properties.message
         })

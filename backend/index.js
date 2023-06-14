@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import {config} from 'dotenv'
+
+
 config()
 // user Router
 import userRouter from './routes/userRouters.js'
@@ -12,11 +14,18 @@ import './config/connection.js'
 
 const app = express()
 
+
+
 // parsing json data
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(cookieParser())
+// Enable CORS
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+
 app.use('/',userRouter)
 
 app.listen(process.env.PORT, () => console.log(`server running on port: http//:localost:${process.env.PORT}`))

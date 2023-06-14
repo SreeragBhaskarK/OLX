@@ -30,6 +30,9 @@
   overflow-x: scroll;
   overflow-y: hidden;
 }
+.moreView .cards::-webkit-scrollbar{
+  overflow-x: hidden;
+}
 
 .card {
   margin-right: 15px;

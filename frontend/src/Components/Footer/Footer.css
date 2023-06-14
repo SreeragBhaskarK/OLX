@@ -1,11 +1,10 @@
 .footerParentDiv {
-  width: 100vw;
+  width: 100%;
 }
 .footerParentDiv .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ebeeef;
   padding: 16px;
 }
 .footerParentDiv .content .heading {
@@ -18,7 +17,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background: #002f34;
   color: whitesmoke;
 }
 

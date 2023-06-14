@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState,useContext } from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Login.css';
+import axios from '../../axios';
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('/login', formData).then((response) => {
+      if (response.data.success) {
+        navigate('/')
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div>
       <div className="loginParentDiv">
         <img width="200px" height="200px" src={Logo}></img>
-        <form>
+        <form  onSubmit={handleSubmit}>
           <label htmlFor="fname">Email</label>
           <br />
           <input
@@ -16,7 +43,8 @@ function Login() {
             type="email"
             id="fname"
             name="email"
-            defaultValue="John"
+            value={formData.email}
+            onChange={handleChange}
           />
           <br />
           <label htmlFor="lname">Password</label>
@@ -26,13 +54,14 @@ function Login() {
             type="password"
             id="lname"
             name="password"
-            defaultValue="Doe"
+            value={formData.password}
+            onChange={handleChange}
           />
           <br />
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <Link to='/signup'>Signup</Link>
       </div>
     </div>
   );
