@@ -22,8 +22,8 @@ router.post('/add_post',upload.single('image'),add_post)
 //get post 
 router.get('/item/:id',get_item)
 
-router.get('/test',(req,res)=>{
+/* router.get('/test',(req,res)=>{
     res.send(`<form action='/login' method='post'> <input type='email' name='email' /> <input type='password' name='password'  /> <button type="submit">submit</button> </form>`)
 })
-
+ */
 export default router;

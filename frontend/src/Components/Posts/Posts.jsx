@@ -49,7 +49,7 @@ function Posts({ item }) {
 
         </div>
       </div>
-      <div className="recommendations">
+      {/* <div className="recommendations">
         <div className="heading">
           <span>Fresh recommendations</span>
         </div>
@@ -71,7 +71,7 @@ function Posts({ item }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div >
   );
 }
